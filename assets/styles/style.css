@@ -40,19 +40,18 @@ body{
   flex-direction: column;
   justify-content:center;
   align-items:center;
-  gap: 8vh;
+  row-gap: 5vh;
 }
 
 @media (min-width: 800px) {
   .about-me{
     flex-direction: row;
     justify-content:space-around;
-    gap: 0;
   }
 }
 
 .about-me__info{
-  padding: 3.5vw;
+  padding: 4.5vw;
 }
 
 @media (min-width: 800px) {
@@ -129,11 +128,12 @@ body{
 }
 
 .about-me__graph{
-  margin-bottom: 10vh;
+  margin-bottom: 5vh;
 }
 
 @media (min-width: 700px) {
   .about-me__graph{
+    margin-right: 10vh;
     margin-top: 4vh;
     margin-bottom: 0;
   }

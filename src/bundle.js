@@ -310,23 +310,32 @@ window.addEventListener('resize', createTagCloud);
         self.mouseY = self.mouseY0; // current distance between the mouse and rolling center y axis
         // mouseover
 
-        TagCloud._on(self.$el, 'mouseover', function () {
+        let screenEvntDevice = 'mousemove';
+        let screenEvntIn = 'mouseover';
+        let screenEvntOut = 'mouseout';
+        if(window.innerWidth < 600){
+          screenEvntDevice = 'touchmove'
+          screenEvntIn = 'toucstart';
+          screenEvntOut = 'touchend';
+        }
+
+        TagCloud._on(self.$el, screenEvntIn, function () {
           self.active = true;
         }); // mouseout
 
-
-        TagCloud._on(self.$el, 'mouseout', function () {
+        TagCloud._on(self.$el, screenEvntOut, function () {
           self.active = false;
-        }); // mousemove
+        }); // mouseout
 
-
-        TagCloud._on(self.keep ? window : self.$el, 'mousemove', function (ev) {
+        TagCloud._on(self.keep ? window : self.$el, screenEvntDevice, function (ev) {
           ev = ev || window.event;
+          if(screenEvntDevice === 'touchmove'){
+            ev = ev.touches[0] || window.event;
+          }
           var rect = self.$el.getBoundingClientRect();
           self.mouseX = (ev.clientX - (rect.left + rect.width / 2)) / 5;
           self.mouseY = (ev.clientY - (rect.top + rect.height / 2)) / 5;
         }); // update state regularly
-
 
         self._next(); // init update state
 
